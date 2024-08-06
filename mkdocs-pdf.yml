@@ -1,0 +1,9 @@
+# MkDocs configuration for PDF output
+# Usage: ENABLE_PDF_EXPORT=1 mkdocs build -f mkdocs-pdf.yml
+INHERIT: mkdocs-base.yml
+
+markdown_extensions:
+  pymdownx.tabbed: {}
+  admonition: {}
+
+copyright: Percona LLC and/or its affiliates, &#169; 2009 - 2024

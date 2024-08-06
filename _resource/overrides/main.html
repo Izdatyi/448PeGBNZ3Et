@@ -1,0 +1,90 @@
+
+{#
+MkDocs template for builds with Material Theme to customize docs layout 
+by adding marketing-requested elements
+#}
+
+{# Import the theme's layout. #}
+{% extends "base.html" %}
+
+{% block announce %}
+  This is version 1.x of the Percona Operator for PostgreSQL. <strong>The Operator 1.x is end-of-life since June 30, 2024. We strongly recommend to use</strong> <a href="https://docs.percona.com/percona-operator-for-postgresql/2.0/index.html"> Percona Operator for PostgreSQL 2.x </a>.
+{% endblock %}
+
+{%- macro relbar2 () %}
+<div class="md-relbar2__inner md-grid">
+<div class="md-content">
+  <article class="md-content__inner md-typeset" role="main">    
+    <h4>Contact Us </h4>
+       <p>For free technical help, visit the Percona <a class="reference external" href="https://forums.percona.com/c/postgresql/percona-kubernetes-operator-for-postgresql/68?utm_campaign=Doc%20pages" target="_blank">Community Forum</a>.<br>
+       <p>To get early access to new product features, invite-only ”ask me anything” sessions with Percona Kubernetes experts, and monthly swag raffles, join <a class="reference external" href="https://www.percona.com/k8s" target="blank">K8S Squad</a>.<br>
+        <p>To report bugs or submit feature requests, open a <a class="reference external" href="https://jira.percona.com/projects/K8SPG/issues/" target="_blank">JIRA</a> ticket.<br>
+         <p>For paid <a class="reference external" href="https://www.percona.com/services/support"> support </a> and <a class="reference external" href="https://www.percona.com/services/managed-services"> managed </a> or <a class="reference external" href="https://www.percona.com/services/consulting">consulting services </a>, contact <a class="reference external" href="https://www.percona.com/about-percona/contact" target="_blank">Percona Sales</a>.</p>
+ </article>
+</div>
+</div>
+{%- endmacro %}
+
+
+              {% block scripts %}
+              <script src="https://cmp.osano.com/Azqe5vTyLOSbN3OuT/49ad85b5-0418-4794-ab81-7599dddd534c/osano.js"></script>
+
+              {{ super() }}
+
+              <img src="https://tracking.g2crowd.com/attribution_tracking/conversions/1007137.gif?e=" width="1" height="1" />
+
+              <noscript>
+                <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBVF48V" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+              </noscript>
+              {% endblock %}
+
+            
+               {% block extrahead %}
+               {{ super() }}
+                 {% set title = config.site_name %}
+                 {% if page and page.meta and page.meta.title %}
+                 {% set title = title ~ " - " ~ page.meta.title %}
+                 {% elif page and page.title and not page.is_homepage %}
+                 {% set title = title ~ " - " ~ page.title %}
+                 {% endif %}
+                 <meta property="og:type" content="website" />
+                 <meta property="og:title" content="{{ title }}" />
+                 <meta property="og:image" content="https://docs.percona.com/percona-operator-for-postgresql/assets/images/kubernetes-operators.png">
+                 <meta property="og:url" content="https://docs.percona.com/percona-operator-for-postgresql/">
+                </head>
+                <body>
+                </body>
+              </html>
+
+              {% endblock %}
+
+             {% block site_nav %}
+            {% if nav %}
+              {% if page.meta and page.meta.hide %}
+                {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+              {% endif %}
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" {{ hidden }}>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    {% include "partials/nav.html" %}
+                    <br>
+                    <label class="md-nav__title" for="__drawer">
+
+  </label> 
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if "toc.integrate" not in features %}
+              {% if page.meta and page.meta.hide %}
+                {% set hidden = "hidden" if "toc" in page.meta.hide %}
+              {% endif %}
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{ hidden }}>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    {% include "partials/toc.html" %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endblock %}
